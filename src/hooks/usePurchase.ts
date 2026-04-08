@@ -26,7 +26,7 @@ interface UsePurchase {
   isRestoring: boolean;
 }
 
-export function usePurchase(): UsePurchase {
+export function usePurchase(uid?: string | null): UsePurchase {
   const [isPurchasing, setIsPurchasing] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
 
@@ -44,7 +44,7 @@ export function usePurchase(): UsePurchase {
         customerInfo.entitlements.active[ENTITLEMENT_ID] !== undefined;
 
       if (isPremium) {
-        await setPremiumStatus(true);
+        await setPremiumStatus(true, uid);
         return { success: true };
       }
 
@@ -58,7 +58,7 @@ export function usePurchase(): UsePurchase {
         }
         if (error.code === "7") {
           // ITEM_ALREADY_OWNED — grant access
-          await setPremiumStatus(true);
+          await setPremiumStatus(true, uid);
           return { success: true, error: "already_owned" };
         }
       }
@@ -68,7 +68,7 @@ export function usePurchase(): UsePurchase {
     } finally {
       setIsPurchasing(false);
     }
-  }, []);
+  }, [uid]);
 
   const restore = useCallback(async (): Promise<PurchaseResult> => {
     setIsRestoring(true);
@@ -78,10 +78,12 @@ export function usePurchase(): UsePurchase {
         customerInfo.entitlements.active[ENTITLEMENT_ID] !== undefined;
 
       if (isPremium) {
-        await setPremiumStatus(true);
+        await setPremiumStatus(true, uid);
         return { success: true };
       }
 
+      // No active entitlement — clear local premium cache (handles refunds)
+      await setPremiumStatus(false, uid);
       return { success: false, error: "unknown" };
     } catch (err) {
       console.error("[CloudForge] Restore failed:", err);
@@ -89,7 +91,7 @@ export function usePurchase(): UsePurchase {
     } finally {
       setIsRestoring(false);
     }
-  }, []);
+  }, [uid]);
 
   return { purchase, restore, isPurchasing, isRestoring };
 }
