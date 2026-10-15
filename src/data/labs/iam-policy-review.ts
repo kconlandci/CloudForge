@@ -3,21 +3,22 @@ import type { LabManifest } from "../../types/manifest";
 export const iamPolicyReviewLab: LabManifest = {
   schemaVersion: "1.1",
   id: "iam-policy-review",
-  version: 1,
-  title: "IAM Policy Review",
+  version: 2,
+  title: "IAM Policy Review: Auditing AI-Generated Policies",
   tier: "beginner",
   track: "aws-core",
   difficulty: "easy",
   accessLevel: "free",
-  tags: ["aws", "iam", "security", "least-privilege", "policy"],
+  tags: ["aws", "iam", "security", "least-privilege", "policy", "ai-review"],
   description:
-    "Audit IAM policies for over-permissive access, identify least-privilege violations, and toggle settings to enforce correct access controls.",
+    "An AI policy assistant generated these IAM policies from plain-English requests. Audit its output for over-permissive access, identify least-privilege violations, and toggle each setting to the correct access control.",
   estimatedMinutes: 10,
   learningObjectives: [
     "Identify wildcard permissions and resource ARN overuse in IAM policies",
     "Apply least-privilege principle to IAM role and user policies",
     "Distinguish between identity-based and resource-based policy controls",
     "Recognize common IAM misconfigurations that lead to privilege escalation",
+    "Verify AI-generated IAM policies against the workload's actual API calls before deploying them",
   ],
   sortOrder: 104,
   status: "published",
@@ -29,7 +30,7 @@ export const iamPolicyReviewLab: LabManifest = {
       id: "iam-review-s1",
       title: "Lambda Execution Role Audit",
       description:
-        "Review the IAM role attached to a Lambda function that reads from a single DynamoDB table and writes logs to CloudWatch. The current role was cloned from a developer's admin role and needs to be reduced to least-privilege.",
+        "An AI IAM policy assistant generated the role attached to a Lambda function that reads from a single DynamoDB table and writes logs to CloudWatch. Working from the prompt 'give the orders function the permissions it needs', the assistant produced a role cloned from a developer's admin policy. Review its output and reduce it to least-privilege.",
       targetSystem: "IAM Role: lambda-order-processor-role",
       items: [
         {
@@ -118,7 +119,7 @@ export const iamPolicyReviewLab: LabManifest = {
       id: "iam-review-s2",
       title: "Developer IAM User Permissions",
       description:
-        "A junior developer's IAM user has been flagged in a security review. They work on a microservices application using Lambda and DynamoDB. Review and correct their permissions to follow least-privilege without blocking their work.",
+        "A junior developer asked an AI policy assistant to 'set up my access so I can start work Monday,' and a security review has flagged what it created. They work on a microservices application using Lambda and DynamoDB. Review and correct the assistant's permissions to follow least-privilege without blocking their work.",
       targetSystem: "IAM User: dev-user-jsmith",
       items: [
         {
@@ -203,7 +204,7 @@ export const iamPolicyReviewLab: LabManifest = {
       id: "iam-review-s3",
       title: "Cross-Service Role Trust Policy",
       description:
-        "An IAM role used by an ECS task to access S3 has an overly broad trust policy. The role should only be assumable by ECS tasks in your specific cluster, not by any service in any account.",
+        "An AI policy assistant generated the IAM role used by an ECS task to access S3, and its trust policy is overly broad. The role should only be assumable by ECS tasks in your specific cluster, not by any service in any account. Audit the assistant's policy and correct it.",
       targetSystem: "IAM Role Trust Policy: ecs-app-task-role",
       items: [
         {
@@ -298,5 +299,5 @@ export const iamPolicyReviewLab: LabManifest = {
     "IAM misconfigurations are responsible for the majority of AWS security breaches. The ability to read a policy, identify the least-privilege violations, and correct them is tested in the AWS Security Specialty exam and is a daily responsibility in cloud security roles. The iam:PassRole and sts:AssumeRole escalation paths are particularly important to understand.",
   toolRelevance: ["AWS Console", "IAM Access Analyzer", "AWS CLI", "Security Hub"],
   createdAt: "2026-03-28",
-  updatedAt: "2026-03-28",
+  updatedAt: "2026-10-15",
 };
