@@ -3,21 +3,22 @@ import type { LabManifest } from "../../types/manifest";
 export const costAnomalyInvestigationLab: LabManifest = {
   schemaVersion: "1.1",
   id: "cost-anomaly-investigation",
-  version: 1,
-  title: "Cost Anomaly Investigation",
+  version: 2,
+  title: "Cost Anomaly Investigation: Verify the AI's Root Cause",
   tier: "beginner",
   track: "cloud-operations",
   difficulty: "moderate",
   accessLevel: "free",
-  tags: ["finops", "cost-optimization", "aws-cost-explorer", "billing", "anomaly-detection"],
+  tags: ["finops", "cost-optimization", "aws-cost-explorer", "billing", "anomaly-detection", "ai-review"],
   description:
-    "Investigate unexpected AWS cost spikes by analyzing Cost Explorer data, usage reports, and service metrics to identify root causes and implement cost controls.",
+    "Investigate unexpected AWS cost spikes — and check the AI cost assistant's published root-cause summary against the raw Cost Explorer data, usage reports, and service metrics before acting on it.",
   estimatedMinutes: 12,
   learningObjectives: [
     "Read AWS Cost Explorer data to isolate cost anomalies by service and region",
     "Correlate cost spikes with infrastructure events and deployments",
     "Identify common cost anti-patterns like runaway data transfer and orphaned resources",
     "Implement the right cost control to prevent recurrence",
+    "Cross-check an AI assistant's root-cause summary against primary cost and security evidence",
   ],
   sortOrder: 605,
   status: "published",
@@ -29,8 +30,13 @@ export const costAnomalyInvestigationLab: LabManifest = {
       id: "cost-s1",
       title: "Unexpected $4,200 Bill Spike",
       objective:
-        "AWS sent a cost anomaly alert at 9 AM. Last month's bill was $3,100. Yesterday's spend was $4,200 — a 35% spike in a single day. Investigate the cost data to determine the root cause and decide on the correct remediation.",
+        "AWS sent a cost anomaly alert at 9 AM. Last month's bill was $3,100. Yesterday's spend was $4,200 — a 35% spike in a single day. The team's AI cost assistant has already published a root-cause summary (first item below). Investigate the cost data, verify or overturn the assistant's conclusion, and decide on the correct remediation.",
       investigationData: [
+        {
+          id: "ai-assistant-summary",
+          label: "AI Cost Assistant — Published Summary",
+          content: "Root cause: increased outbound data transfer attributed to scheduled backup replication growth toward eu-west-1. Assessment: expected growth pattern, no action required. Confidence: high.",
+        },
         {
           id: "cost-by-service",
           label: "Cost by Service (Yesterday vs 30-day Average)",
@@ -82,8 +88,13 @@ export const costAnomalyInvestigationLab: LabManifest = {
       id: "cost-s2",
       title: "Gradual Cost Creep — 40% Over 3 Months",
       objective:
-        "The engineering manager notices the AWS bill has grown from $8,000/month to $11,200/month over 3 months, without any significant new feature launches. No individual spike stands out. Investigate the usage trends to find the top cost driver.",
+        "The engineering manager notices the AWS bill has grown from $8,000/month to $11,200/month over 3 months, without any significant new feature launches. No individual spike stands out. The AI cost assistant's summary is the first item below — verify it against the usage trends to find the true top cost driver.",
       investigationData: [
+        {
+          id: "ai-assistant-summary",
+          label: "AI Cost Assistant — Published Summary",
+          content: "Primary driver identified: RDS storage growth and a general usage increase across all services. Recommendation: review again next quarter. Confidence: moderate.",
+        },
         {
           id: "monthly-trend",
           label: "Monthly Cost Trend by Service (3 months)",
@@ -135,8 +146,13 @@ export const costAnomalyInvestigationLab: LabManifest = {
       id: "cost-s3",
       title: "S3 Cost Spike — Unexpected Storage Growth",
       objective:
-        "S3 costs jumped from $180/month to $940/month in a single billing period. No new applications were deployed. Investigate the S3 usage data to find the cause and recommend the right fix.",
+        "S3 costs jumped from $180/month to $940/month in a single billing period. No new applications were deployed. The AI cost assistant's recommended fix is the first item below — verify it against the S3 usage data and recommend the right fix.",
       investigationData: [
+        {
+          id: "ai-assistant-summary",
+          label: "AI Cost Assistant — Published Summary",
+          content: "Cause: growth in stored log volume. Recommended fix: immediately delete all log objects older than 1 year to reduce storage cost. Confidence: high.",
+        },
         {
           id: "s3-cost-breakdown",
           label: "S3 Cost Breakdown (This Month vs Last)",
@@ -199,5 +215,5 @@ export const costAnomalyInvestigationLab: LabManifest = {
     "FinOps skills are increasingly expected of senior engineers, not just finance teams. Engineers who can read Cost Explorer, isolate cost anomalies to specific resources, and implement lifecycle policies and scheduling automation are highly valued at companies where cloud spend is a significant line item.",
   toolRelevance: ["AWS Cost Explorer", "AWS Budgets", "AWS Cost Anomaly Detection", "AWS S3 Lifecycle", "CloudHealth"],
   createdAt: "2026-03-28",
-  updatedAt: "2026-03-28",
+  updatedAt: "2026-10-15",
 };

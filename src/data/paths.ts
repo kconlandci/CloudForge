@@ -162,6 +162,7 @@ export const learningPaths: LearningPath[] = [
       "observability-stack-design",
       "gitops-workflow-design",
       "capacity-planning-forecast",
+      "ai-terraform-plan-review",
     ],
   },
   {

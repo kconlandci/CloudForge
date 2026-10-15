@@ -3,21 +3,22 @@ import type { LabManifest } from "../../types/manifest";
 export const costOptimizationReviewLab: LabManifest = {
   schemaVersion: "1.1",
   id: "cost-optimization-review",
-  version: 1,
-  title: "Cloud Cost Optimization Review",
+  version: 2,
+  title: "Cloud Cost Optimization Review: Verifying an AI FinOps Assistant",
   tier: "intermediate",
   track: "cloud-architecture",
   difficulty: "easy",
   accessLevel: "free",
-  tags: ["cost-optimization", "finops", "rightsizing", "reserved-capacity", "waste"],
+  tags: ["cost-optimization", "finops", "rightsizing", "reserved-capacity", "waste", "ai-review"],
   description:
-    "Review a cloud environment's configuration settings and toggle each resource to its cost-optimal state, learning to identify over-provisioning, unused resources, and savings plan opportunities.",
+    "An AI FinOps assistant reviewed this cloud environment and applied its recommended configuration changes, claiming a 40% saving. Verify each setting it touched against the utilization data and toggle each resource to its true cost-optimal state.",
   estimatedMinutes: 15,
   learningObjectives: [
     "Identify over-provisioned compute and storage resources through utilization metrics",
     "Distinguish between on-demand, reserved, and spot pricing models",
     "Apply rightsizing principles to underutilized instances",
     "Recognize cost waste from idle resources and unnecessary data transfer",
+    "Verify an AI FinOps assistant's applied changes against raw utilization data before accepting its savings claims",
   ],
   sortOrder: 405,
   status: "published",
@@ -29,7 +30,7 @@ export const costOptimizationReviewLab: LabManifest = {
       id: "cost-compute-rightsizing",
       title: "Compute Fleet Rightsizing",
       description:
-        "Your infrastructure team has pulled a utilization report for the production compute fleet. Each instance type setting needs to be reviewed and set to the cost-optimal configuration based on observed utilization data.",
+        "An AI FinOps assistant applied its rightsizing recommendations to the production compute fleet and reported the fleet as 'optimized.' Your infrastructure team's utilization report is below. Verify each setting the assistant changed and set it to the cost-optimal configuration based on the observed data.",
       targetSystem: "Production Compute Fleet",
       items: [
         {
@@ -111,7 +112,7 @@ export const costOptimizationReviewLab: LabManifest = {
       id: "cost-database-optimization",
       title: "Database Cost Configuration",
       description:
-        "The database layer accounts for 38% of total cloud spend. Review each database configuration setting and toggle it to the cost-optimal state based on workload characteristics and access patterns.",
+        "The database layer accounts for 38% of total cloud spend, and the AI FinOps assistant has applied its recommended settings here too. Review each database configuration setting and toggle it to the cost-optimal state based on workload characteristics and access patterns.",
       targetSystem: "Database Tier",
       items: [
         {
@@ -180,7 +181,7 @@ export const costOptimizationReviewLab: LabManifest = {
       id: "cost-network-optimization",
       title: "Network & Egress Cost Configuration",
       description:
-        "Network costs are growing faster than traffic. Review each network configuration and toggle settings to reduce data transfer costs without degrading user experience.",
+        "Network costs are growing faster than traffic, and the AI FinOps assistant's summary calls this layer 'already optimal.' Review each network configuration yourself and toggle settings to reduce data transfer costs without degrading user experience.",
       targetSystem: "Network & CDN Layer",
       items: [
         {
@@ -253,5 +254,5 @@ export const costOptimizationReviewLab: LabManifest = {
     "Infracost",
   ],
   createdAt: "2026-03-28",
-  updatedAt: "2026-03-28",
+  updatedAt: "2026-10-15",
 };

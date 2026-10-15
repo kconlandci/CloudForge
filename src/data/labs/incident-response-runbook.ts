@@ -3,21 +3,22 @@ import type { LabManifest } from "../../types/manifest";
 export const incidentResponseRunbookLab: LabManifest = {
   schemaVersion: "1.1",
   id: "incident-response-runbook",
-  version: 1,
-  title: "Incident Response Runbook",
+  version: 2,
+  title: "Incident Response Runbook: Supervising the AI On-Call Assistant",
   tier: "beginner",
   track: "cloud-operations",
   difficulty: "moderate",
   accessLevel: "free",
-  tags: ["sre", "incident-response", "runbook", "on-call", "escalation"],
+  tags: ["sre", "incident-response", "runbook", "on-call", "escalation", "ai-review"],
   description:
-    "Triage and respond to production incidents by correctly classifying severity, choosing the right remediation steps, and following established runbook procedures to minimize customer impact.",
+    "An AI on-call assistant now posts a preliminary classification and recommended remediation on every incident. Triage production incidents by verifying the assistant's take against the raw evidence: classify severity, choose the right remediation, and minimize customer impact.",
   estimatedMinutes: 12,
   learningObjectives: [
     "Classify incident severity using SEV levels based on customer impact",
     "Select the correct first responder action to contain an incident",
     "Distinguish between immediate mitigation and root cause investigation",
     "Identify when to escalate versus self-resolve an incident",
+    "Evaluate an AI on-call assistant's preliminary classification and remediation against raw incident evidence",
   ],
   sortOrder: 604,
   status: "published",
@@ -29,7 +30,7 @@ export const incidentResponseRunbookLab: LabManifest = {
       id: "ir-s1",
       title: "Payment Service Timeout Spike",
       description:
-        "PagerDuty fires at 2:17 AM. CloudWatch shows the payment service Lambda function timeout rate jumped from 0.1% to 34% over the last 5 minutes. Stripe webhook processing is failing. Customers are unable to complete purchases. The Lambda function calls an RDS PostgreSQL database.",
+        "PagerDuty fires at 2:17 AM. CloudWatch shows the payment service Lambda function timeout rate jumped from 0.1% to 34% over the last 5 minutes. Stripe webhook processing is failing. Customers are unable to complete purchases. The Lambda function calls an RDS PostgreSQL database. An AI on-call assistant's preliminary assessment appears in the evidence below — verify it against the raw metrics before acting on it.",
       evidence: [
         { type: "metric", content: "Lambda Timeout Rate: 34% (normal: <0.5%)" },
         { type: "metric", content: "Lambda Duration P99: 29,800ms (timeout configured at 30,000ms)" },
@@ -38,6 +39,7 @@ export const incidentResponseRunbookLab: LabManifest = {
         { type: "log", content: "[ERROR] FATAL: remaining connection slots are reserved for replication" },
         { type: "metric", content: "RDS CPUUtilization: 12% (normal)" },
         { type: "metric", content: "Active Stripe Webhooks Queued: 4,312 (growing)" },
+        { type: "event", content: "AI on-call assistant — preliminary assessment: 'SEV-2: Lambda code regression causing slow queries. Recommended remediation: reboot the RDS instance to reset connections.'" },
       ],
       classifications: [
         { id: "sev1-db-saturation", label: "SEV-1: Database connection pool exhaustion causing payment failure", description: "Critical — all customers unable to pay, active connection saturation confirmed." },
@@ -69,7 +71,7 @@ export const incidentResponseRunbookLab: LabManifest = {
       id: "ir-s2",
       title: "Deployment-Triggered Memory Leak",
       description:
-        "At 3:45 PM, after a deployment to the user-service ECS task, CloudWatch shows memory utilization climbing on all 6 running tasks. Three tasks have already been replaced by ECS health checks. Customer-facing errors are at 2%. The deployment was 45 minutes ago.",
+        "At 3:45 PM, after a deployment to the user-service ECS task, CloudWatch shows memory utilization climbing on all 6 running tasks. Three tasks have already been replaced by ECS health checks. Customer-facing errors are at 2%. The deployment was 45 minutes ago. An AI on-call assistant's preliminary assessment appears in the evidence below — verify it against the raw metrics before acting on it.",
       evidence: [
         { type: "metric", content: "ECS Memory Utilization: 94% and rising (was 55% pre-deploy)" },
         { type: "metric", content: "ECS Task Replacement Rate: 3 tasks replaced in last 20 minutes" },
@@ -78,6 +80,7 @@ export const incidentResponseRunbookLab: LabManifest = {
         { type: "log", content: "[INFO] Deployment user-service:v2.4.1 completed at 15:00:00" },
         { type: "metric", content: "ECS Task Count: 6/6 desired (health checks replacing crashed tasks)" },
         { type: "event", content: "Previous deployment: user-service:v2.4.0 at 09:00:00 (stable for 6 hours)" },
+        { type: "event", content: "AI on-call assistant — preliminary assessment: 'SEV-2: memory pressure. Recommended remediation: increase the ECS task memory limit to 8GB to stabilize the service.'" },
       ],
       classifications: [
         { id: "sev2-memory-leak-deploy", label: "SEV-2: Deployment-introduced memory leak in user-service v2.4.1", description: "High — progressive degradation correlated with deployment, rollback available." },
@@ -109,7 +112,7 @@ export const incidentResponseRunbookLab: LabManifest = {
       id: "ir-s3",
       title: "S3 Access Denied — Static Asset Outage",
       description:
-        "At 10:22 AM, your company's marketing website goes blank. Browser developer tools show all CSS, JS, and image files returning HTTP 403 Forbidden. The files are served from an S3 bucket with a CloudFront distribution. No deployments have occurred today. An IAM policy review happened yesterday afternoon.",
+        "At 10:22 AM, your company's marketing website goes blank. Browser developer tools show all CSS, JS, and image files returning HTTP 403 Forbidden. The files are served from an S3 bucket with a CloudFront distribution. No deployments have occurred today. An IAM policy review happened yesterday afternoon. An AI on-call assistant's preliminary assessment appears in the evidence below — verify it against the raw metrics before acting on it.",
       evidence: [
         { type: "log", content: "CloudFront access log: 403 Forbidden for s3://assets.company.com/styles/main.css" },
         { type: "log", content: "S3 server access log: 403 AccessDenied — OAI (Origin Access Identity) request rejected" },
@@ -118,6 +121,7 @@ export const incidentResponseRunbookLab: LabManifest = {
         { type: "log", content: "AWS CloudTrail: PutBucketPolicy executed by iam-admin@company.com at 16:45:33" },
         { type: "metric", content: "S3 Bucket Objects: 2,341 (unchanged, files still exist)" },
         { type: "event", content: "S3 Block Public Access: Enabled (unchanged)" },
+        { type: "event", content: "AI on-call assistant — preliminary assessment: 'SEV-3: CloudFront cache issue serving stale 403 responses. Recommended remediation: run a full cache invalidation (/*).'" },
       ],
       classifications: [
         { id: "sev2-bucket-policy-change", label: "SEV-2: S3 bucket policy change broke CloudFront OAI permissions", description: "High — marketing site down, caused by yesterday's IAM policy modification removing OAI access." },
@@ -160,5 +164,5 @@ export const incidentResponseRunbookLab: LabManifest = {
     "Incident response skill is one of the top differentiators between junior and senior engineers. The ability to rapidly classify severity, read logs and metrics together, and choose the fastest safe remediation directly translates to reduced mean time to recovery (MTTR) — a core SRE metric every team measures.",
   toolRelevance: ["PagerDuty", "AWS CloudWatch", "AWS CloudTrail", "AWS ECS", "Datadog"],
   createdAt: "2026-03-28",
-  updatedAt: "2026-03-28",
+  updatedAt: "2026-10-15",
 };

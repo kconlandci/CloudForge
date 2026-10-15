@@ -5,6 +5,7 @@
 // ============================================================
 
 import type { LabManifest } from "../types/manifest";
+import { aiTerraformPlanReviewLab } from "./labs/ai-terraform-plan-review";
 import { apiGatewayDesignLab } from "./labs/api-gateway-design";
 import { apiVersioningStrategyLab } from "./labs/api-versioning-strategy";
 import { appServiceDeploymentLab } from "./labs/app-service-deployment";
@@ -202,7 +203,7 @@ export const labCatalog: LabManifest[] = [
   devsecopsPipelineSecurityLab,
   supplyChainSecurityCloudLab,
 
-  // Cloud Operations / DevOps (15)
+  // Cloud Operations / DevOps (16)
   cicdPipelineDesignLab,
   cloudwatchAlarmSetupLab,
   terraformStateManagementLab,
@@ -218,4 +219,5 @@ export const labCatalog: LabManifest[] = [
   observabilityStackDesignLab,
   gitopsWorkflowDesignLab,
   capacityPlanningForecastLab,
+  aiTerraformPlanReviewLab,
 ].sort((a, b) => a.sortOrder - b.sortOrder);
