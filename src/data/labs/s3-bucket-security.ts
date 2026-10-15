@@ -3,21 +3,22 @@ import type { LabManifest } from "../../types/manifest";
 export const s3BucketSecurityLab: LabManifest = {
   schemaVersion: "1.1",
   id: "s3-bucket-security",
-  version: 1,
-  title: "S3 Bucket Security Configuration",
+  version: 2,
+  title: "S3 Bucket Security: Auditing AI-Applied Settings",
   tier: "beginner",
   track: "aws-core",
   difficulty: "easy",
   accessLevel: "free",
-  tags: ["aws", "s3", "security", "iam", "data-protection"],
+  tags: ["aws", "s3", "security", "iam", "data-protection", "ai-review"],
   description:
-    "Audit and correct S3 bucket security settings to prevent data exposure, enforce encryption, and apply least-privilege access controls.",
+    "An AI configuration assistant applied the initial settings on these S3 buckets and reported them as secure. Audit its work and correct each setting to prevent data exposure, enforce encryption, and apply least-privilege access controls.",
   estimatedMinutes: 10,
   learningObjectives: [
     "Identify misconfigured S3 bucket settings that create security risks",
     "Apply block public access settings correctly based on bucket purpose",
     "Configure server-side encryption and versioning appropriately",
     "Evaluate bucket policies against least-privilege principles",
+    "Audit AI-applied bucket configurations instead of trusting an assistant's 'secure' self-report",
   ],
   sortOrder: 101,
   status: "published",
@@ -29,7 +30,7 @@ export const s3BucketSecurityLab: LabManifest = {
       id: "s3-security-s1",
       title: "Production Data Bucket Audit",
       description:
-        "A security audit has flagged your production data bucket `prod-customer-data-7f3a` containing PII. Review each setting and toggle it to the secure state. This bucket is only accessed by backend services via IAM roles — no direct public access is ever needed.",
+        "An AI configuration assistant set up your production data bucket `prod-customer-data-7f3a` containing PII and reported it as 'configured to security best practices.' A security audit has flagged it. Review each setting the assistant applied and toggle it to the secure state. This bucket is only accessed by backend services via IAM roles — no direct public access is ever needed.",
       targetSystem: "S3 Bucket: prod-customer-data-7f3a",
       items: [
         {
@@ -110,7 +111,7 @@ export const s3BucketSecurityLab: LabManifest = {
       id: "s3-security-s2",
       title: "Public Static Website Bucket",
       description:
-        "You're hosting a public marketing website from S3 bucket `marketing-static-site`. The site must be publicly readable but not allow public uploads or policy changes that could lead to exfiltration. Configure the settings for a secure public static website.",
+        "An AI configuration assistant applied its standard 'maximum security' template to S3 bucket `marketing-static-site`, which hosts a public marketing website — and the site is now returning errors. The site must be publicly readable but not allow public uploads or policy changes that could lead to exfiltration. Correct the assistant's settings for a secure public static website.",
       targetSystem: "S3 Bucket: marketing-static-site",
       items: [
         {
@@ -187,7 +188,7 @@ export const s3BucketSecurityLab: LabManifest = {
       id: "s3-security-s3",
       title: "Cross-Account Replication Bucket",
       description:
-        "Bucket `dr-replica-us-west-2` is the destination for cross-account replication from a production account. It needs to accept replicated objects from a separate AWS account (account ID: 112233445566) without allowing any other external access. Configure it correctly.",
+        "An AI configuration assistant prepared bucket `dr-replica-us-west-2`, the destination for cross-account replication from a production account, and marked the task complete. It needs to accept replicated objects from a separate AWS account (account ID: 112233445566) without allowing any other external access. Review the assistant's configuration and correct it.",
       targetSystem: "S3 Bucket: dr-replica-us-west-2",
       items: [
         {
@@ -279,5 +280,5 @@ export const s3BucketSecurityLab: LabManifest = {
     "S3 misconfiguration is the leading cause of cloud data breaches. The ability to audit and correctly configure S3 security settings is tested in AWS Security Specialty exams and is a daily responsibility for cloud security engineers. Knowing the distinction between a public website bucket and a private data bucket configuration is fundamental.",
   toolRelevance: ["AWS Console", "AWS CLI", "AWS Config", "Security Hub"],
   createdAt: "2026-03-28",
-  updatedAt: "2026-03-28",
+  updatedAt: "2026-10-15",
 };

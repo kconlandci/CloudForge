@@ -3,21 +3,22 @@ import type { LabManifest } from "../../types/manifest";
 export const haArchitectureDesignLab: LabManifest = {
   schemaVersion: "1.1",
   id: "ha-architecture-design",
-  version: 1,
-  title: "High Availability Architecture",
+  version: 2,
+  title: "High Availability Architecture: Reviewing AI-Proposed Designs",
   tier: "intermediate",
   track: "cloud-architecture",
   difficulty: "moderate",
   accessLevel: "free",
-  tags: ["architecture", "high-availability", "resilience", "fault-tolerance"],
+  tags: ["architecture", "high-availability", "resilience", "fault-tolerance", "ai-review"],
   description:
-    "Design and evaluate high-availability architectures by choosing the right redundancy patterns, failover strategies, and load balancing approaches for real-world production workloads.",
+    "An AI architecture assistant has drafted these high-availability designs and certified each one as meeting its availability target. Evaluate its proposals: choose the right redundancy patterns, failover strategies, and load balancing approaches for real production workloads.",
   estimatedMinutes: 20,
   learningObjectives: [
     "Identify single points of failure in a given architecture",
     "Select appropriate redundancy patterns for stateful and stateless services",
     "Evaluate trade-offs between active-active and active-passive failover",
     "Apply health-check and circuit-breaker patterns to prevent cascading failures",
+    "Challenge an AI architecture assistant's availability claims with availability math and failure-domain analysis",
   ],
   sortOrder: 400,
   status: "published",
@@ -29,7 +30,7 @@ export const haArchitectureDesignLab: LabManifest = {
       id: "ha-spof-database",
       title: "Eliminating a Database Single Point of Failure",
       context:
-        "Your e-commerce platform runs a single primary relational database instance handling all reads and writes. During a recent maintenance window the instance became unavailable for 45 minutes, costing significant revenue. Leadership demands 99.9% uptime. You must redesign the data tier.",
+        "Your e-commerce platform runs a single primary relational database instance handling all reads and writes. During a recent maintenance window the instance became unavailable for 45 minutes, costing significant revenue. Leadership demands 99.9% uptime. You must redesign the data tier. The AI architecture assistant's draft recommends placing a caching layer in front of the database and asserts the data tier is 'sufficiently resilient as designed.'",
       displayFields: [
         { label: "Current Uptime", value: "98.7%", emphasis: "warn" },
         { label: "Downtime Cost", value: "$4,200/hr", emphasis: "critical" },
@@ -61,7 +62,7 @@ export const haArchitectureDesignLab: LabManifest = {
       id: "ha-load-balancer-placement",
       title: "Load Balancer Tier Redundancy",
       context:
-        "Your three-tier web application uses a single hardware load balancer in front of eight application servers. The load balancer vendor's SLA is 99.5%. Your overall application SLA target is 99.95%. The load balancer itself has become the reliability bottleneck.",
+        "Your three-tier web application uses a single hardware load balancer in front of eight application servers. The load balancer vendor's SLA is 99.5%. Your overall application SLA target is 99.95%. The load balancer itself has become the reliability bottleneck. The AI architecture assistant's draft recommends upgrading to the vendor's higher-tier load balancer and claims its SLA 'effectively meets' the 99.95% target.",
       displayFields: [
         { label: "Load Balancer SLA", value: "99.5%", emphasis: "critical" },
         { label: "App Server Count", value: "8 instances", emphasis: "normal" },
@@ -93,7 +94,7 @@ export const haArchitectureDesignLab: LabManifest = {
       id: "ha-stateful-sessions",
       title: "Stateful Session Management Under Horizontal Scaling",
       context:
-        "Your authentication service stores user session tokens in application server memory. You need to scale from 2 to 10 servers to handle load, but sticky sessions are causing uneven distribution — one server handles 60% of traffic. A server restart invalidates all sessions on that node.",
+        "Your authentication service stores user session tokens in application server memory. You need to scale from 2 to 10 servers to handle load, but sticky sessions are causing uneven distribution — one server handles 60% of traffic. A server restart invalidates all sessions on that node. The AI architecture assistant's draft recommends replacing server-side sessions with signed stateless tokens (JWT) and describes it as 'the modern, scalable fix with no operational downsides.'",
       displayFields: [
         { label: "Session Duration", value: "8 hours (average)", emphasis: "normal" },
         { label: "Active Sessions", value: "~50,000 concurrent", emphasis: "warn" },
@@ -142,5 +143,5 @@ export const haArchitectureDesignLab: LabManifest = {
     "HAProxy",
   ],
   createdAt: "2026-03-28",
-  updatedAt: "2026-03-28",
+  updatedAt: "2026-10-15",
 };

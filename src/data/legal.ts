@@ -4,27 +4,27 @@
 // ============================================================
 
 export const privacyPolicy = `CloudForge Privacy Policy
-Last updated: March 2026
+Last updated: October 2026
 
 1. Data Storage
-CloudForge stores progress data (completed labs, scores, streaks, XP) locally on your device. No progress data is transmitted to external servers.
+CloudForge stores progress data (completed labs, scores, streaks, XP) locally on your device and backs it up to Firebase (Google Cloud) so it can be restored if your device's local storage is cleared. Your progress backup is tied only to your anonymous user ID (see Section 2) — it contains your lab progress, scores, streaks, and XP, and no personal identity information.
 
 2. Anonymous Authentication
-We use Firebase Anonymous Authentication to generate a random user ID. No personal information (name, email, phone number) is collected or stored.
+We use Firebase Anonymous Authentication to generate a random user ID. No personal information (name, email, phone number) is collected or stored. This anonymous ID is not linked to your real-world identity. Because the anonymous ID is specific to your app installation, reinstalling the app creates a new ID and previously backed-up progress cannot be restored after a reinstall.
 
 3. Purchase Data
-If you purchase the Founders Pack, Google Play processes the transaction. We receive only entitlement status through RevenueCat — never your payment details.
+If you subscribe to Forge Labs Pro (via a monthly subscription or yearly subscription), the transaction is processed by Google Play. RevenueCat, a third-party subscription management service, receives your anonymous user ID and purchase receipt from Google Play to verify your entitlement. RevenueCat does not receive your name, email, or payment details — those are handled directly by Google. We receive only your entitlement status through RevenueCat — never your payment details.
 
 4. Analytics
-Usage analytics (labs started, completed, session duration) are stored locally on your device for your personal review in the Usage Stats screen. This data is not transmitted externally.
+Usage analytics (labs started, completed, session duration) are stored locally on your device for your personal review in the Usage Stats screen. The same events are also sent to Firebase under your anonymous user ID so we can understand how the app is used. They are not linked to your identity and are never sold.
 
 5. Third-Party Services
-- Firebase: Anonymous authentication only
-- RevenueCat: Purchase verification only
+- Firebase: Anonymous authentication, cloud progress backup, and usage analytics
+- RevenueCat: Subscription management and purchase verification
 - Google Play: Payment processing
 
 6. Data Deletion
-You can reset all local data from Settings > Reset Progress. Uninstalling the app removes all stored data.
+You can reset all progress from Settings > Reset Progress. This clears the data on your device and overwrites your cloud progress backup with a fresh start. Uninstalling the app removes all locally stored data.
 
 7. Children's Privacy
 CloudForge does not knowingly collect data from children under 13.
@@ -33,7 +33,7 @@ CloudForge does not knowingly collect data from children under 13.
 cloudforge.app@gmail.com`;
 
 export const termsOfService = `CloudForge Terms of Service
-Last updated: March 2026
+Last updated: October 2026
 
 1. Acceptance
 By using CloudForge, you agree to these Terms of Service.
@@ -45,7 +45,7 @@ CloudForge is an educational tool designed to build cloud engineering judgment t
 All scenarios, metrics, configurations, and error messages within CloudForge are simulated and fictional. They are designed to teach decision-making principles, not to replicate exact cloud provider behavior.
 
 4. Purchases
-The Founders Pack is a one-time purchase processed through Google Play. Refund requests should be directed to Google Play support per their refund policy.
+Premium labs are unlocked with a Forge Labs Pro subscription, offered in monthly and yearly plans and processed through Google Play. Current plan prices are shown in the app before you purchase. Your subscription renews automatically unless cancelled before the end of the current billing period. You can manage or cancel your subscription at any time in your Google Play account settings; you keep premium access until the end of the period already paid for. Refund requests should be directed to Google Play support per their refund policy.
 
 5. Intellectual Property
 All content, scenarios, and code within CloudForge are proprietary. You may not reproduce, distribute, or create derivative works.
